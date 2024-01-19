@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://dws4mqvhckw07"]
+
+[ext_resource type="Script" path="res://Scripts/bomb.gd" id="1_ejdsm"]
+
+[node name="Test" type="Node2D"]
+
+[node name="BombsContainer" type="HBoxContainer" parent="."]
+offset_right = 384.0
+offset_bottom = 64.0
+theme_override_constants/separation = 0
+alignment = 2
+script = ExtResource("1_ejdsm")

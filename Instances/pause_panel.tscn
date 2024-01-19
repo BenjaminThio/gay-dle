@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3b7ciy8c500g"]
+
+[ext_resource type="Script" path="res://scripts/pause_panel.gd" id="1_h7m3e"]
+
+[node name="PausePanel" type="Panel"]
+offset_left = 448.0
+offset_top = 160.0
+offset_right = 704.0
+offset_bottom = 480.0
+script = ExtResource("1_h7m3e")
+
+[node name="Resume" type="Button" parent="."]
+process_mode = 2
+layout_mode = 0
+offset_left = 64.0
+offset_top = 32.0
+offset_right = 192.0
+offset_bottom = 96.0
+text = "Resume"
+
+[node name="Restart" type="Button" parent="."]
+process_mode = 2
+layout_mode = 0
+offset_left = 64.0
+offset_top = 128.0
+offset_right = 192.0
+offset_bottom = 192.0
+text = "Restart"
+
+[node name="Main Menu" type="Button" parent="."]
+process_mode = 2
+layout_mode = 0
+offset_left = 64.0
+offset_top = 224.0
+offset_right = 192.0
+offset_bottom = 288.0
+text = "Main Menu"
+
+[connection signal="pressed" from="Resume" to="." method="resume"]
+[connection signal="pressed" from="Restart" to="." method="restart"]
+[connection signal="pressed" from="Main Menu" to="." method="main_menu"]

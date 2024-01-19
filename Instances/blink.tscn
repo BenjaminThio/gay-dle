@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmk3oqyvh1jcx"]
+
+[ext_resource type="Texture2D" uid="uid://kdir137h1y1i" path="res://Sprites/blink.png" id="1_86cun"]
+[ext_resource type="Script" path="res://Scripts/blink.gd" id="2_ar8up"]
+
+[node name="Blink" type="Sprite2D"]
+modulate = Color(1, 0, 0, 1)
+z_index = 1
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("1_86cun")
+script = ExtResource("2_ar8up")

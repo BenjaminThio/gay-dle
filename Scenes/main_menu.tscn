@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7fvxwwdinfjq"]
+
+[ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_lsqkg"]
+[ext_resource type="AudioStream" uid="uid://6ngmki52vok1" path="res://Musics/intro.ogg" id="2_x1ac1"]
+
+[node name="Main Menu" type="Node2D"]
+script = ExtResource("1_lsqkg")
+
+[node name="Title" type="Label" parent="."]
+offset_left = 496.0
+offset_top = 40.0
+offset_right = 658.0
+offset_bottom = 63.0
+text = "GAY-DLE PROTOTYPE"
+
+[node name="Start" type="Button" parent="."]
+offset_left = 512.0
+offset_top = 128.0
+offset_right = 640.0
+offset_bottom = 192.0
+text = "PLAY"
+
+[node name="Exit" type="Button" parent="."]
+offset_left = 512.0
+offset_top = 256.0
+offset_right = 640.0
+offset_bottom = 320.0
+text = "EXIT"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_x1ac1")
+autoplay = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 324)
+
+[connection signal="pressed" from="Start" to="." method="play"]
+[connection signal="pressed" from="Exit" to="." method="exit"]

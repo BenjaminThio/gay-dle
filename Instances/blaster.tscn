@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://3ggqg4pw3anf"]
+
+[ext_resource type="Script" path="res://Scripts/blaster.gd" id="1_6e5n4"]
+[ext_resource type="Texture2D" uid="uid://dn8qkjuhxtum8" path="res://icon.svg" id="2_t0vh8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gtqhn"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gtc5d"]
+size = Vector2(80, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8pcq3"]
+size = Vector2(512, 64)
+
+[node name="Blaster" type="CharacterBody2D" groups=["ally"]]
+collision_mask = 4
+script = ExtResource("1_6e5n4")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+self_modulate = Color(1, 0.392157, 0.784314, 1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_t0vh8")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gtqhn")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="Collision" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_gtc5d")
+
+[node name="ShootingRange" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="Collision" type="CollisionShape2D" parent="ShootingRange"]
+shape = SubResource("RectangleShape2D_8pcq3")
+
+[node name="VisibleOnScreenNotifier" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(2.27374e-13, 2.27374e-13)
+scale = Vector2(3.2, 3.2)
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_enemy_entered_hitbox"]
+[connection signal="body_exited" from="Hitbox" to="." method="_on_enemy_exited_hitbox"]
+[connection signal="body_entered" from="ShootingRange" to="." method="_on_enemy_entered_shooting_range"]
+[connection signal="body_exited" from="ShootingRange" to="." method="_on_enemy_exited_shooting_range"]

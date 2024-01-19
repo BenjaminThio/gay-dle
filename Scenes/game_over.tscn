@@ -1,0 +1,57 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqom8l5n4gh6l"]
+
+[ext_resource type="Script" path="res://Scripts/game_over.gd" id="1_kyh7e"]
+
+[node name="Game Over" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kyh7e")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 64.0
+grow_horizontal = 2
+text = "YOU WIN"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="PlayAgain" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -196.0
+offset_right = 96.0
+offset_bottom = -132.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "PLAY AGAIN"
+
+[node name="MainMenu" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -68.0
+offset_right = 96.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "MAIN MENU"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[connection signal="pressed" from="PlayAgain" to="." method="_on_play_again_pressed"]
+[connection signal="pressed" from="MainMenu" to="." method="_on_main_menu_pressed"]

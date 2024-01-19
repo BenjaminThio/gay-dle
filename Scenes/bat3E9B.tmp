@@ -1,0 +1,155 @@
+[gd_scene load_steps=17 format=3 uid="uid://5s0b57a5w5hi"]
+
+[ext_resource type="Script" path="res://Scripts/battlefield.gd" id="1_mohjs"]
+[ext_resource type="PackedScene" uid="uid://cnxvn13kecjdt" path="res://Instances/player_base.tscn" id="2_bjdl5"]
+[ext_resource type="Texture2D" uid="uid://nrquekuyl4mr" path="res://Sprites/background.png" id="2_w44h6"]
+[ext_resource type="PackedScene" uid="uid://dm3vaj1mvx0ou" path="res://Instances/cannon_attack_range.tscn" id="3_jy15t"]
+[ext_resource type="PackedScene" uid="uid://cotwct8wnytqe" path="res://Instances/character_slots_container.tscn" id="5_2fgho"]
+[ext_resource type="Script" path="res://Scripts/enemy_base.gd" id="5_k4nwo"]
+[ext_resource type="FontFile" uid="uid://kqx4m6h6ygf4" path="res://Fonts/BlackOpsOne-Regular.ttf" id="6_lypq8"]
+[ext_resource type="Texture2D" uid="uid://dn8qkjuhxtum8" path="res://icon.svg" id="6_o2dcm"]
+[ext_resource type="PackedScene" uid="uid://ycrnb6hfqasd" path="res://Instances/cannon_charger.tscn" id="6_sdsqk"]
+[ext_resource type="Script" path="res://Scripts/pause.gd" id="9_tdvir"]
+[ext_resource type="AudioStream" uid="uid://dcy37qwae0mok" path="res://Musics/big_bang.ogg" id="9_twdgb"]
+[ext_resource type="PackedScene" uid="uid://c3b7ciy8c500g" path="res://Instances/pause_panel.tscn" id="11_74fy3"]
+[ext_resource type="Script" path="res://Scripts/ally_layer.gd" id="13_gmy7e"]
+[ext_resource type="PackedScene" uid="uid://cnehyyvf688qe" path="res://Instances/enemy_dark_assassin.tscn" id="14_nxx0g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1eskn"]
+size = Vector2(128, 192)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ohlrk"]
+size = Vector2(136, 192)
+
+[node name="Battlefield" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_mohjs")
+
+[node name="Canvas" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="Background" type="TextureRect" parent="Canvas"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -383.0
+offset_bottom = -137.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.4974, 1.26712)
+texture = ExtResource("2_w44h6")
+expand_mode = 1
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(576, 564)
+collision_layer = 4
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="Collision" type="CollisionPolygon2D" parent="Ground"]
+build_mode = 1
+polygon = PackedVector2Array(-512, -84, 512, -84, 512, -532, -512, -532, -544, -564, 544, -564, 544, -52, -544, -52, -544, -564, -512, -532)
+
+[node name="PlayerBase" parent="." instance=ExtResource("2_bjdl5")]
+
+[node name="CanonAttackRange" parent="PlayerBase" groups=["cannon"] instance=ExtResource("3_jy15t")]
+position = Vector2(248, 416)
+metadata/_edit_group_ = true
+
+[node name="EnemyBase" type="StaticBody2D" parent="." groups=["enemy"]]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("5_k4nwo")
+
+[node name="Collision" type="CollisionShape2D" parent="EnemyBase"]
+position = Vector2(128, 384)
+shape = SubResource("RectangleShape2D_1eskn")
+
+[node name="Sprite" type="Sprite2D" parent="EnemyBase"]
+self_modulate = Color(1, 0, 0, 1)
+position = Vector2(128, 384)
+scale = Vector2(1, 1.5)
+texture = ExtResource("6_o2dcm")
+
+[node name="Spawnpoint" type="Marker2D" parent="EnemyBase"]
+position = Vector2(128, 448)
+
+[node name="Hitbox" type="Area2D" parent="EnemyBase"]
+position = Vector2(128, 384)
+collision_layer = 0
+
+[node name="Collision" type="CollisionShape2D" parent="EnemyBase/Hitbox"]
+position = Vector2(4, 0)
+shape = SubResource("RectangleShape2D_ohlrk")
+
+[node name="HitpointsLabel" type="Label" parent="EnemyBase"]
+offset_left = 64.0
+offset_top = 256.0
+offset_right = 192.0
+offset_bottom = 288.0
+theme_override_fonts/font = ExtResource("6_lypq8")
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Money" type="Label" parent="."]
+offset_right = 96.0
+offset_bottom = 56.0
+theme_override_fonts/font = ExtResource("6_lypq8")
+theme_override_font_sizes/font_size = 40
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="CharacterSlotsContainer" parent="." instance=ExtResource("5_2fgho")]
+
+[node name="LevelUpWalletButton" type="Button" parent="."]
+offset_left = 56.0
+offset_top = 512.0
+offset_right = 201.0
+offset_bottom = 640.0
+text = "LEVEL UP WALLET"
+metadata/_edit_use_anchors_ = true
+
+[node name="CannonCharger" parent="." instance=ExtResource("6_sdsqk")]
+
+[node name="Pause" type="Button" parent="."]
+top_level = true
+offset_left = 1000.0
+offset_top = 24.0
+offset_right = 1128.0
+offset_bottom = 88.0
+text = "PAUSE"
+script = ExtResource("9_tdvir")
+
+[node name="PausePanel" parent="Pause" instance=ExtResource("11_74fy3")]
+visible = false
+layout_mode = 0
+offset_left = -552.0
+offset_top = 136.0
+offset_right = -296.0
+offset_bottom = 456.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 324)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_twdgb")
+volume_db = -80.0
+autoplay = true
+
+[node name="AllyLayer" type="Node2D" parent="."]
+script = ExtResource("13_gmy7e")
+
+[node name="DarkAssassin" parent="." instance=ExtResource("14_nxx0g")]
+position = Vector2(128, 448)
+
+[connection signal="body_entered" from="EnemyBase/Hitbox" to="EnemyBase" method="_on_opponent_body_entered"]
+[connection signal="body_exited" from="EnemyBase/Hitbox" to="EnemyBase" method="_on_opponent_body_exited"]
+[connection signal="pressed" from="LevelUpWalletButton" to="." method="level_up_wallet"]
+[connection signal="pressed" from="Pause" to="Pause" method="pause"]

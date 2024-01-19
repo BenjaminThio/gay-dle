@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://qwrhx6h3h1vw"]
+
+[ext_resource type="Script" path="res://Scripts/test2.gd" id="1_bq1g8"]
+[ext_resource type="Texture2D" uid="uid://dn8qkjuhxtum8" path="res://icon.svg" id="1_fsm0x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h5q1f"]
+size = Vector2(128, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ef5c6"]
+size = Vector2(128, 128)
+
+[node name="Test2" type="Node2D"]
+script = ExtResource("1_bq1g8")
+
+[node name="Area2D1" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D1"]
+self_modulate = Color(1, 0, 0, 1)
+texture = ExtResource("1_fsm0x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D1"]
+shape = SubResource("RectangleShape2D_h5q1f")
+
+[node name="Area2D2" type="Area2D" parent="."]
+position = Vector2(64, 0)
+collision_mask = 2
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D2"]
+self_modulate = Color(0, 1, 0, 1)
+texture = ExtResource("1_fsm0x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+shape = SubResource("RectangleShape2D_ef5c6")
+
+[connection signal="area_entered" from="Area2D1" to="." method="_on_area_2d_1_area_entered"]
+[connection signal="area_entered" from="Area2D2" to="." method="_on_area_2d_2_area_entered"]

@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://5psm5ujgbi5w"]
+
+[ext_resource type="Script" path="res://Scripts/enemy_god.gd" id="1_y58wu"]
+[ext_resource type="Texture2D" uid="uid://dn8qkjuhxtum8" path="res://icon.svg" id="2_txuy3"]
+[ext_resource type="FontFile" uid="uid://kqx4m6h6ygf4" path="res://Fonts/BlackOpsOne-Regular.ttf" id="3_qe3e3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gtqhn"]
+size = Vector2(208, 416)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gtc5d"]
+size = Vector2(224, 416)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8pcq3"]
+size = Vector2(528, 416)
+
+[node name="God" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_y58wu")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 0, 1)
+position = Vector2(2.86102e-06, -176)
+scale = Vector2(1.5, 3.25)
+texture = ExtResource("2_txuy3")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -176)
+shape = SubResource("RectangleShape2D_gtqhn")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="Collision" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -176)
+shape = SubResource("RectangleShape2D_gtc5d")
+
+[node name="ShootingRange" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="Collision" type="CollisionShape2D" parent="ShootingRange"]
+position = Vector2(0, -176)
+shape = SubResource("RectangleShape2D_8pcq3")
+
+[node name="VisibleOnScreenNotifier" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(4.05312e-06, -176)
+scale = Vector2(10.4, 20.8)
+
+[node name="HitpointsLabel" type="Label" parent="."]
+offset_left = -104.0
+offset_top = -416.0
+offset_right = 104.0
+offset_bottom = -384.0
+theme_override_fonts/font = ExtResource("3_qe3e3")
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_ally_entered_hitbox"]
+[connection signal="body_exited" from="Hitbox" to="." method="_on_ally_exited_hitbox"]
+[connection signal="body_entered" from="ShootingRange" to="." method="_on_ally_entered_shooting_range"]
+[connection signal="body_exited" from="ShootingRange" to="." method="_on_ally_exited_shooting_range"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier" to="." method="_on_visible_on_screen_notifier_screen_exited"]

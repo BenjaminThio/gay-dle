@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://xqaa0qvi3olt"]
+
+[ext_resource type="Texture2D" uid="uid://dn8qkjuhxtum8" path="res://icon.svg" id="1_56dty"]
+[ext_resource type="Script" path="res://Scripts/marksman.gd" id="1_hv8gq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gtqhn"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8pcq3"]
+size = Vector2(256, 64)
+
+[node name="Marksman" type="Area2D" groups=["ally"]]
+position = Vector2(832, 320)
+script = ExtResource("1_hv8gq")
+metadata/_edit_group_ = true
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_56dty")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gtqhn")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="Collision" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_8pcq3")
+
+[node name="VisibleOnScreenNotifier" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(1.90735e-06, 1.90735e-06)
+scale = Vector2(3.2, 3.2)
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier" to="." method="_on_visible_on_screen_notifier_screen_exited"]

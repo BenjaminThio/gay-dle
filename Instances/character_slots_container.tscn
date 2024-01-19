@@ -1,0 +1,62 @@
+[gd_scene load_steps=3 format=3 uid="uid://cotwct8wnytqe"]
+
+[ext_resource type="Script" path="res://Scripts/character_slots_container.gd" id="1_bwdqq"]
+[ext_resource type="PackedScene" uid="uid://us0yxv21tsoq" path="res://Instances/slot.tscn" id="2_oss3c"]
+
+[node name="CharacterSlotsContainer" type="VBoxContainer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 384.0
+offset_top = 504.0
+offset_right = 3456.0
+offset_bottom = 1592.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.125, 0.125)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 64
+script = ExtResource("1_bwdqq")
+metadata/_edit_group_ = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Row1" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 128
+
+[node name="Slot1" parent="Row1" instance=ExtResource("2_oss3c")]
+layout_mode = 2
+
+[node name="Slot2" parent="Row1" instance=ExtResource("2_oss3c")]
+layout_mode = 2
+
+[node name="Slot3" parent="Row1" instance=ExtResource("2_oss3c")]
+layout_mode = 2
+
+[node name="Slot4" parent="Row1" instance=ExtResource("2_oss3c")]
+layout_mode = 2
+
+[node name="Slot5" parent="Row1" instance=ExtResource("2_oss3c")]
+layout_mode = 2
+
+[node name="Row2" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 128
+
+[node name="Slot1" parent="Row2" instance=ExtResource("2_oss3c")]
+layout_mode = 2
+
+[node name="Slot2" parent="Row2" instance=ExtResource("2_oss3c")]
+layout_mode = 2
+
+[node name="Slot3" parent="Row2" instance=ExtResource("2_oss3c")]
+layout_mode = 2
+
+[node name="Slot4" parent="Row2" instance=ExtResource("2_oss3c")]
+layout_mode = 2
+
+[node name="Slot5" parent="Row2" instance=ExtResource("2_oss3c")]
+layout_mode = 2

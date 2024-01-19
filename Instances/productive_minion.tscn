@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://b4rin6yn50gk"]
+
+[ext_resource type="Script" path="res://Scripts/minion.gd" id="1_8ns6l"]
+[ext_resource type="Texture2D" uid="uid://dn8qkjuhxtum8" path="res://icon.svg" id="2_0rnuw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qqor4"]
+size = Vector2(48, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lg58d"]
+size = Vector2(64, 48)
+
+[node name="minion" type="CharacterBody2D" groups=["ally"]]
+collision_mask = 4
+script = ExtResource("1_8ns6l")
+speed = 50
+max_hitpoints = 70.0
+single_attack = true
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_qqor4")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+modulate = Color(0.784314, 0.784314, 1, 1)
+position = Vector2(9.53674e-07, 8)
+scale = Vector2(0.375, 0.375)
+texture = ExtResource("2_0rnuw")
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0, 8)
+collision_layer = 0
+collision_mask = 2
+
+[node name="Collision" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_lg58d")
+
+[node name="VisibleOnScreenNotifier" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, 8)
+scale = Vector2(2.4, 2.4)
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_enemy_entered"]
+[connection signal="body_exited" from="Hitbox" to="." method="_on_enemy_exited"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier" to="." method="_on_visible_on_screen_notifier_screen_exited"]

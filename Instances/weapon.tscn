@@ -1,0 +1,56 @@
+[gd_scene load_steps=11 format=3 uid="uid://uehoc23i8w20"]
+
+[ext_resource type="Script" path="res://Scripts/weapon.gd" id="1_b37me"]
+[ext_resource type="Texture2D" uid="uid://dblpu1qickkqg" path="res://Sprites/Weapons/Knife/knife_1.png" id="2_f4r1g"]
+[ext_resource type="Texture2D" uid="uid://marndpplaf5s" path="res://Sprites/Weapons/Knife/knife_2.png" id="3_26frd"]
+[ext_resource type="Texture2D" uid="uid://cf7k28atgyq8i" path="res://Sprites/Weapons/Knife/knife_4.png" id="4_efssy"]
+[ext_resource type="Texture2D" uid="uid://8i1q32w2vu0h" path="res://Sprites/Weapons/Knife/knife_3.png" id="5_ht785"]
+[ext_resource type="Texture2D" uid="uid://h7rv4xar5rsu" path="res://Sprites/Weapons/Knife/knife_5.png" id="6_k6oe1"]
+[ext_resource type="AudioStream" uid="uid://bttnlrf2w46np" path="res://Sounds/snd_slay.wav" id="7_masc6"]
+[ext_resource type="Texture2D" uid="uid://l371fapi5bk1" path="res://Sprites/Weapons/Knife/knife_6.png" id="7_p26nv"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_76vvy"]
+animations = [{
+"frames": [{
+"duration": 0.5,
+"texture": ExtResource("2_f4r1g")
+}, {
+"duration": 0.5,
+"texture": ExtResource("3_26frd")
+}, {
+"duration": 0.5,
+"texture": ExtResource("5_ht785")
+}, {
+"duration": 0.5,
+"texture": ExtResource("4_efssy")
+}, {
+"duration": 0.5,
+"texture": ExtResource("6_k6oe1")
+}, {
+"duration": 0.5,
+"texture": ExtResource("7_p26nv")
+}],
+"loop": false,
+"name": &"slay",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mapwg"]
+size = Vector2(64, 160)
+
+[node name="Weapon" type="Area2D"]
+script = ExtResource("1_b37me")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_76vvy")
+animation = &"slay"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_mapwg")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_masc6")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://dyel36bsd0pm1"]
+
+[ext_resource type="Script" path="res://Scripts/magic_explosion.gd" id="1_klkcf"]
+[ext_resource type="Texture2D" uid="uid://uo68xjt045kv" path="res://circle_icon.png" id="2_hkudo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jtwoc"]
+radius = 64.0
+
+[node name="MagicExplosion" type="Area2D"]
+z_index = 1
+position = Vector2(1.52588e-05, 1.52588e-05)
+scale = Vector2(1e-05, 1e-05)
+collision_layer = 0
+script = ExtResource("1_klkcf")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 0, 1)
+z_index = 1
+position = Vector2(-1.33514e-05, -1.33514e-05)
+texture = ExtResource("2_hkudo")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_jtwoc")
+
+[connection signal="body_entered" from="." to="." method="_on_opponent_entered"]
+[connection signal="body_exited" from="." to="." method="_on_opponent_exited"]

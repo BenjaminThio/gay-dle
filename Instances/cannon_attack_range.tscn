@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=3 uid="uid://dm3vaj1mvx0ou"]
+
+[ext_resource type="Script" path="res://Scripts/bombs_container.gd" id="1_ex1n0"]
+[ext_resource type="PackedScene" uid="uid://8887rvml721t" path="res://Instances/controlled_bomb.tscn" id="1_l8fc1"]
+[ext_resource type="Texture2D" uid="uid://b84epbd4qgt1w" path="res://Sprites/dotted_line.png" id="2_s48wi"]
+
+[node name="CanonAttackRange" type="Node2D"]
+
+[node name="BombsContainer" type="HBoxContainer" parent="."]
+offset_right = 384.0
+offset_bottom = 64.0
+theme_override_constants/separation = 0
+alignment = 2
+script = ExtResource("1_ex1n0")
+
+[node name="ControlledBomb1" parent="BombsContainer" instance=ExtResource("1_l8fc1")]
+layout_mode = 2
+
+[node name="ControlledBomb2" parent="BombsContainer" instance=ExtResource("1_l8fc1")]
+layout_mode = 2
+
+[node name="ControlledBomb3" parent="BombsContainer" instance=ExtResource("1_l8fc1")]
+layout_mode = 2
+
+[node name="ControlledBomb4" parent="BombsContainer" instance=ExtResource("1_l8fc1")]
+layout_mode = 2
+
+[node name="ControlledBomb5" parent="BombsContainer" instance=ExtResource("1_l8fc1")]
+layout_mode = 2
+
+[node name="ControlledBomb6" parent="BombsContainer" instance=ExtResource("1_l8fc1")]
+layout_mode = 2
+
+[node name="ControlledBomb7" parent="BombsContainer" instance=ExtResource("1_l8fc1")]
+layout_mode = 2
+
+[node name="ControlledBomb8" parent="BombsContainer" instance=ExtResource("1_l8fc1")]
+layout_mode = 2
+
+[node name="ControlledBomb9" parent="BombsContainer" instance=ExtResource("1_l8fc1")]
+layout_mode = 2
+
+[node name="ControlledBomb10" parent="BombsContainer" instance=ExtResource("1_l8fc1")]
+layout_mode = 2
+
+[node name="ControlledBomb11" parent="BombsContainer" instance=ExtResource("1_l8fc1")]
+layout_mode = 2
+
+[node name="DottedLine" type="Sprite2D" parent="."]
+self_modulate = Color(1, 0, 1, 1)
+position = Vector2(0, 16)
+scale = Vector2(0.0625, 0.1875)
+texture = ExtResource("2_s48wi")

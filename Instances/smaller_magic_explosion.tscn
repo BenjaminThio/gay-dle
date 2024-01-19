@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://dga45afwef24k"]
+
+[ext_resource type="Script" path="res://Scripts/smaller_magic_explosion.gd" id="1_r3766"]
+[ext_resource type="Texture2D" uid="uid://dn8qkjuhxtum8" path="res://icon.svg" id="2_d2b5i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rfgb0"]
+size = Vector2(128, 128)
+
+[node name="SmallerMagicExplosion" type="Area2D"]
+z_index = 1
+position = Vector2(1.52588e-05, 1.52588e-05)
+scale = Vector2(1e-05, 1e-05)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_r3766")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 0, 1)
+z_index = 1
+texture = ExtResource("2_d2b5i")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_rfgb0")
+
+[connection signal="body_entered" from="." to="." method="_on_opponent_entered"]
+[connection signal="body_exited" from="." to="." method="_on_opponent_exited"]

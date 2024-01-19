@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://cnxvn13kecjdt"]
+
+[ext_resource type="Script" path="res://Scripts/base.gd" id="1_5jjup"]
+[ext_resource type="Texture2D" uid="uid://dn8qkjuhxtum8" path="res://icon.svg" id="2_je1vx"]
+[ext_resource type="FontFile" uid="uid://kqx4m6h6ygf4" path="res://Fonts/BlackOpsOne-Regular.ttf" id="3_5kb7w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iiqxw"]
+size = Vector2(128, 192)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sgpn4"]
+size = Vector2(136, 192)
+
+[node name="PlayerBase" type="StaticBody2D" groups=["ally", "base"]]
+collision_mask = 0
+script = ExtResource("1_5jjup")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(1024, 384)
+shape = SubResource("RectangleShape2D_iiqxw")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+self_modulate = Color(0, 1, 0, 1)
+position = Vector2(1024, 384)
+scale = Vector2(1, 1.5)
+texture = ExtResource("2_je1vx")
+
+[node name="Spawnpoint" type="Marker2D" parent="."]
+position = Vector2(1024, 448)
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(1024, 384)
+collision_layer = 0
+collision_mask = 2
+
+[node name="Collision" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-4, 0)
+shape = SubResource("RectangleShape2D_sgpn4")
+
+[node name="HitpointsLabel" type="Label" parent="."]
+offset_left = 960.0
+offset_top = 256.0
+offset_right = 1088.0
+offset_bottom = 287.0
+theme_override_fonts/font = ExtResource("3_5kb7w")
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_opponent_body_entered"]
+[connection signal="body_exited" from="Hitbox" to="." method="_on_opponent_body_exited"]

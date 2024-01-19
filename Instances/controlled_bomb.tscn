@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://8887rvml721t"]
+
+[ext_resource type="Texture2D" uid="uid://dn8qkjuhxtum8" path="res://icon.svg" id="1_33hnv"]
+[ext_resource type="Script" path="res://Scripts/bomb.gd" id="1_cax0o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h5ieb"]
+size = Vector2(64, 64)
+
+[node name="CannonAttackRange" type="Control"]
+modulate = Color(1, 0.27451, 0, 0)
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_cax0o")
+
+[node name="Bomb" type="Area2D" parent="."]
+z_index = 1
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bomb"]
+position = Vector2(32, 32)
+shape = SubResource("RectangleShape2D_h5ieb")
+
+[node name="Sprite" type="Sprite2D" parent="Bomb"]
+position = Vector2(32, 32)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_33hnv")
+
+[connection signal="body_entered" from="Bomb" to="." method="_on_body_entered"]
+[connection signal="body_exited" from="Bomb" to="." method="_on_body_exited"]

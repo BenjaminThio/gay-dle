@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://ycrnb6hfqasd"]
+
+[ext_resource type="Script" path="res://Scripts/cannon_charger.gd" id="1_fdmhw"]
+[ext_resource type="Texture2D" uid="uid://c6311nk7yassd" path="res://Sprites/circle.png" id="2_x6lnq"]
+
+[node name="CannonCharger" type="Node2D"]
+position = Vector2(1024, 576)
+script = ExtResource("1_fdmhw")
+metadata/_edit_group_ = true
+
+[node name="CooldownProgressBar" type="TextureProgressBar" parent="."]
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 448.0
+offset_bottom = 448.0
+scale = Vector2(0.25, 0.25)
+fill_mode = 3
+texture_under = ExtResource("2_x6lnq")
+texture_progress = ExtResource("2_x6lnq")
+tint_under = Color(0.196078, 0, 0.196078, 1)
+tint_progress = Color(1, 0, 1, 1)
+
+[node name="FireButton" type="Button" parent="."]
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+text = "FIRE"
+flat = true
+
+[connection signal="pressed" from="FireButton" to="." method="_on_fire_button_pressed"]

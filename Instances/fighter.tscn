@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://7rxlcge4qc8y"]
+
+[ext_resource type="Script" path="res://Scripts/fighter.gd" id="1_enk6y"]
+[ext_resource type="Texture2D" uid="uid://dn8qkjuhxtum8" path="res://icon.svg" id="2_501rb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_utiuq"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lg58d"]
+size = Vector2(80, 64)
+
+[node name="Fighter" type="CharacterBody2D" groups=["ally"]]
+collision_mask = 4
+script = ExtResource("1_enk6y")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_utiuq")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+modulate = Color(0, 0.196078, 1, 1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_501rb")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="Collision" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_lg58d")
+
+[node name="VisibleOnScreenNotifier" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(1.90735e-06, 1.90735e-06)
+scale = Vector2(3.2, 3.2)
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_enemy_entered"]
+[connection signal="body_exited" from="Hitbox" to="." method="_on_enemy_exited"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier" to="." method="_on_visible_on_screen_notifier_screen_exited"]
